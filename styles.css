@@ -1,0 +1,350 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #1e293b;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      padding: 35px 30px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #3b82f6, #38bdf8, #0f172a);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1e293b;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #2563eb, #0f172a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 45px;
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    .progress-container {
+      background: #f1f5f9;
+      border-radius: 20px;
+      position: relative;
+      height: 26px;
+      width: 100%;
+      margin-bottom: 65px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #3b82f6, #38bdf8);
+      height: 100%;
+      border-radius: 20px;
+      width: 0%;
+      transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      overflow: visible;
+    }
+
+    .progress-text {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .milestone {
+      position: absolute;
+      top: 40px;
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .milestone-3 { left: 0; }
+    .milestone-6 { left: 50%; transform: translateX(-50%); }
+    .milestone-12 { right: 0; }
+
+    .badge {
+      position: absolute;
+      top: -40px;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 16px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .badge:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge-5 {
+      left: 0;
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    }
+
+    .badge-7 {
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+    }
+
+    .badge-10 {
+      right: 0;
+      background: linear-gradient(135deg, #0f172a, #334155);
+    }
+
+    .status-icon {
+      font-size: 16px;
+      display: inline-flex;
+      transition: transform 0.3s ease;
+    }
+
+    .status-text {
+      font-size: 17px;
+      color: #334155;
+      margin-top: 15px;
+      font-weight: 600;
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      border: 1px solid #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .benefits-section {
+      margin-top: 20px;
+      padding-top: 25px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .benefits-title {
+      font-size: 20px;
+      color: #1e293b;
+      margin-bottom: 25px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .benefits-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .benefit-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .benefit-circle {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-circle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .benefit-circle:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .benefit-circle:hover::before {
+      transform: translateY(0);
+    }
+
+    .benefit-5 { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .benefit-7 { background: linear-gradient(135deg, #38bdf8, #7dd3fc); }
+    .benefit-10 { background: linear-gradient(135deg, #0f172a, #334155); }
+
+    .benefit-status {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      min-width: 100px;
+    }
+
+    .redeemed {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .available {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+
+    .not-available {
+      background: #f1f5f9;
+      color: #94a3b8;
+    }
+
+    .benefit-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+    }
+
+    .footer-note {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #64748b;
+      padding-top: 15px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 25px 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      .subtitle {
+        font-size: 15px;
+        margin-bottom: 35px;
+      }
+      
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+      
+      .benefit-circle {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+      }
+      
+      .benefit-status {
+        font-size: 12px;
+        padding: 5px 10px;
+        min-width: 80px;
+      }
+      
+      .logo {
+        gap: 10px;
+      }
+      
+      .logo-image {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .logo-text {
+        font-size: 24px;
+      }
+    }
