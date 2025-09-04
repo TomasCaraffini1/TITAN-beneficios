@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITANPush | Fidelización</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #1e293b;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      padding: 35px 30px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #3b82f6, #38bdf8, #0f172a);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1e293b;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #2563eb, #0f172a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 45px;
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    .progress-container {
+      background: #f1f5f9;
+      border-radius: 20px;
+      position: relative;
+      height: 26px;
+      width: 100%;
+      margin-bottom: 65px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #3b82f6, #38bdf8);
+      height: 100%;
+      border-radius: 20px;
+      width: 0%;
+      transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      overflow: visible;
+    }
+
+    .progress-text {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .milestone {
+      position: absolute;
+      top: 40px;
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .milestone-3 { left: 0; }
+    .milestone-6 { left: 50%; transform: translateX(-50%); }
+    .milestone-12 { right: 0; }
+
+    .badge {
+      position: absolute;
+      top: -40px;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 16px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .badge:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge-5 {
+      left: 0;
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    }
+
+    .badge-7 {
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+    }
+
+    .badge-10 {
+      right: 0;
+      background: linear-gradient(135deg, #0f172a, #334155);
+    }
+
+    .status-icon {
+      font-size: 16px;
+      display: inline-flex;
+      transition: transform 0.3s ease;
+    }
+
+    .status-text {
+      font-size: 17px;
+      color: #334155;
+      margin-top: 15px;
+      font-weight: 600;
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 14px;
+      margin-bottom: 25px;
+      border: 1px solid #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .benefits-section {
+      margin-top: 20px;
+      padding-top: 25px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .benefits-title {
+      font-size: 20px;
+      color: #1e293b;
+      margin-bottom: 25px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .benefits-container {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .benefit-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .benefit-circle {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-circle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .benefit-circle:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .benefit-circle:hover::before {
+      transform: translateY(0);
+    }
+
+    .benefit-5 { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .benefit-7 { background: linear-gradient(135deg, #38bdf8, #7dd3fc); }
+    .benefit-10 { background: linear-gradient(135deg, #0f172a, #334155); }
+
+    .benefit-status {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      min-width: 100px;
+    }
+
+    .redeemed {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .available {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+
+    .not-available {
+      background: #f1f5f9;
+      color: #94a3b8;
+    }
+
+    .benefit-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+    }
+
+    .footer-note {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #64748b;
+      padding-top: 15px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 25px 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      .subtitle {
+        font-size: 15px;
+        margin-bottom: 35px;
+      }
+      
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+      
+      .benefit-circle {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+      }
+      
+      .benefit-status {
+        font-size: 12px;
+        padding: 5px 10px;
+        min-width: 80px;
+      }
+      
+      .logo {
+        gap: 10px;
+      }
+      
+      .logo-image {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .logo-text {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-image">
+        <!-- Logo oficial de TITANPush (imagen local) -->
+        <img src="logo_titan.png" alt="Logo TITANPush">
+      </div>
+      <div class="logo-text">TITANPush</div>
+    </div>
+    <div class="title">Descuento por Permanencia</div>
+    <div class="subtitle">¡Recibí increíbles beneficios por tu antigüedad en nuestro sitio!</div>
+        
+    <!-- contenedor barra de progreso -->
+    <div class="progress-container"> 
+      <div class="progress-bar" id="progressBar">
+        <span class="progress-text" id="progressText">0%</span>
+      </div>
+
+      <div class="badge badge-5">
+        <span class="status-icon" id="icon5">❌</span>
+        5% OFF
+      </div>
+      <div class="badge badge-7">
+        <span class="status-icon" id="icon7">❌</span>
+        7% OFF
+      </div>
+      <div class="badge badge-10">
+        <span class="status-icon" id="icon10">❌</span>
+        10% OFF
+      </div>
+
+      <div class="milestone milestone-3">3 meses</div>
+      <div class="milestone milestone-6">6 meses</div>
+      <div class="milestone milestone-12">12 meses</div>
+    </div>
+
+    <div class="status-text" id="statusText"></div>
+    
+    <div class="benefits-section">
+      <div class="benefits-title">
+        <i class="fas fa-gift"></i>
+        Beneficios canjeables
+      </div>
+      <div class="benefits-container">
+        <div class="benefit-item">
+          <div class="benefit-circle benefit-5" id="circle5">
+            5%
+          </div>
+          <div class="benefit-status not-available" id="status5">
+            No disponible
+          </div>
+          <div class="benefit-label">3 meses</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-circle benefit-7" id="circle7">
+            7%
+          </div>
+          <div class="benefit-status not-available" id="status7">
+            No disponible
+          </div>
+          <div class="benefit-label">6 meses</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-circle benefit-10" id="circle10">
+            10%
+          </div>
+          <div class="benefit-status not-available" id="status10">
+            No disponible
+          </div>
+          <div class="benefit-label">12 meses</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-note">
+      <i class="fas fa-info-circle"></i> Los beneficios se renuevan cada año
+    </div>
+  </div>
+
+  <script>
+    // Fecha de alta del usuario
+    const fechaAlta = new Date('2025-0-06');
+    const hoy = new Date();
+    
+    // Calcular meses de antigüedad
+    let meses = (hoy.getFullYear() - fechaAlta.getFullYear()) * 12 + (hoy.getMonth() - fechaAlta.getMonth());
+    
+    if (hoy.getDate() < fechaAlta.getDate()) meses--;
+    
+    // Calcular progreso (máximo 100%)
+    const progreso = Math.min((meses / 12) * 100, 100);
+    document.getElementById('progressBar').style.width = progreso + '%';
+    document.getElementById('progressText').textContent = Math.round(progreso) + '%';
+    
+    // Mensaje de estado
+    let statusMsg = `Antigüedad: ${meses} mes${meses !== 1 ? 'es' : ''}. `;
+    let redeemed5 = false;
+    let redeemed7 = false;
+    let redeemed10 = false;
+    
+    // Actualizar estados según meses
+    if (meses >= 12) {
+      statusMsg += "🎉 ¡Tenés un 10% de descuento disponible!";
+      updateBenefit(5, true, "Disponible", "available");
+      updateBenefit(7, true, "Disponible", "available");
+      updateBenefit(10, true, "Disponible", "available");
+    } else if (meses >= 6) {
+      statusMsg += "✨ ¡Tenés un 7% de descuento disponible!";
+      updateBenefit(5, true, "Disponible", "available");
+      updateBenefit(7, true, "Disponible", "available");
+    } else if (meses >= 3) {
+      statusMsg += "✅ ¡Tenés un 5% de descuento disponible!";
+      updateBenefit(5, true, "Disponible", "available");
+    } else {
+      const faltan = 3 - meses;
+      statusMsg += `📌 Te faltan ${faltan} mes${faltan !== 1 ? 'es' : ''} para obtener un 5% OFF.`;
+    }
+    
+    document.getElementById('statusText').textContent = statusMsg;
+    
+    // Función para actualizar el estado de un beneficio
+    function updateBenefit(discount, available, text, statusClass) {
+      const iconElement = document.getElementById(`icon${discount}`);
+      const statusElement = document.getElementById(`status${discount}`);
+      
+      if (available) {
+        iconElement.textContent = "✓";
+        iconElement.style.color = "#10b981";
+        statusElement.textContent = text;
+        statusElement.className = `benefit-status ${statusClass}`;
+      }
+    }
+    
+    // Simular canje al hacer clic en los círculos
+    document.querySelectorAll('.benefit-circle').forEach(circle => {
+      circle.addEventListener('click', function() {
+        const discount = parseInt(this.textContent.trim());
+        
+        // Verificar si el beneficio está disponible para canjear
+        if ((discount === 5 && meses >= 3 && !redeemed5) ||
+            (discount === 7 && meses >= 6 && !redeemed7) ||
+            (discount === 10 && meses >= 12 && !redeemed10)) {
+          
+          // Actualizar estado
+          const statusElement = document.getElementById(`status${discount}`);
+          statusElement.textContent = "Canjeado";
+          statusElement.className = "benefit-status redeemed";
+          
+          // Actualizar badge
+          const iconElement = document.getElementById(`icon${discount}`);
+          iconElement.textContent = "✓";
+          iconElement.style.color = "#10b981";
+          
+          // Marcar como canjeado
+          if (discount === 5) redeemed5 = true;
+          if (discount === 7) redeemed7 = true;
+          if (discount === 10) redeemed10 = true;
+          
+          // Animación simple sin confeti
+          this.style.transform = "translateY(-8px) scale(1.2)";
+          this.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.2)";
+          
+          setTimeout(() => {
+            this.style.transform = "";
+            this.style.boxShadow = "";
+          }, 300);
+        }
+      });
+    });
+    
+    // Animación para los badges
+    document.querySelectorAll('.badge').forEach(badge => {
+      badge.addEventListener('mouseenter', function() {
+        if (this.classList.contains('badge-7')) {
+          this.style.transform = "translateX(-50%) translateY(-5px) scale(1.05)";
+        } else {
+          this.style.transform = "translateY(-5px) scale(1.05)";
+        }
+      });
+      
+      badge.addEventListener('mouseleave', function() {
+        if (this.classList.contains('badge-7')) {
+          this.style.transform = "translateX(-50%)";
+        } else {
+          this.style.transform = "";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
